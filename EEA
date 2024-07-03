@@ -1,0 +1,232 @@
+Sub preencher()
+'
+' preencher Macro
+' Preencher formulário
+'
+' Atalho do teclado: Ctrl+Shift+P
+'
+    Application.ScreenUpdating = False
+    
+    'Chave de acesso
+    Sheets("XML").Select
+    Range("Tabela21[Id]").Select
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("A2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    'Endereço 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:xLgr]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("B2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+
+    'Bairo 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:xBairro]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("C2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    'Mun 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:xMun]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("D2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    'UF 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:UF]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("E2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    
+    'Endereço 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:xLgr2]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("F2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    'Numero 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:nro2]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("G2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    'Mun 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:xMun2]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("H2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    
+    'UF 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:UF2]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("I2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    'Pedido 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:xPed]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    ActiveWindow.SmallScroll ToRight:=2
+    Range("J2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+    'Pedido 
+    Sheets("XML").Select
+    Range("Tabela21[ns1:qVol]").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets("Formulário").Select
+    Range("K2").Select
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+        
+
+Editar
+    
+End Sub
+
+Sub Editar()
+'
+' Macro1 Macro
+
+    Dim iTotalLinhas As Long
+    Dim I            As Long
+    Dim strBody            As String
+    Dim Textotal            As String
+    
+    
+
+'
+    Sheets("Formulário").Select
+
+            
+    ActiveSheet.Range("Tabela2").RemoveDuplicates Columns:=Array(1, 10), Header:=yes
+    
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = "=CONCATENATE(""Etiqueta "",ROW()-1)"
+    Range("M2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=CONCATENATE(""CD    - "",[@[    ''Endereço ]],"", "",[@[    ''Numero ]],"" - "",[@[    ''Mun ]],"" - "",[@[    ''UF ]])"
+    Range("N2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=CONCAT(""CD  - "",[@[    ''Endereço ]],"" - "",[@[    ''Bairo ]], "" - "",[@[    ''Mun ]],"" - "",[@[    ''UF ]])"
+    Range("O2").Select
+    ActiveCell.FormulaR1C1 = "=CONCATENATE(""Código de Barras – XML"")"
+    Range("P2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=RIGHT([@[ ''Chave de acesso    ]],(LEN([@[ ''Chave de acesso    ]])-3))"
+    Range("Q2").Select
+    ActiveCell.FormulaR1C1 = "=[@[    ''Pedido ]]"
+    Range("R2").Select
+    ActiveCell.FormulaR1C1 = "=[@[    ''Volumetria]]"
+
+    'Formulário.Select
+        
+        
+    iTotalLinhas = Range("a" & Rows.Count).End(xlUp).Row
+    
+    I = 2
+    
+    While I <= iTotalLinhas - 1
+    
+    '.HTMLBody
+    
+    strBody = "<html> <body>" & "<br><br>" & "<b>" & "<span style='background-color: yellow; font-weight:bold'>" & "<U>" & Cells(I, 12).Value & "</U>" & "</span>" & "</b>" & "<br><br>" & Cells(I, 13).Value & "<br><br>" & Cells(I, 14).Value & "<br><br>" & Cells(I, 15).Value & "<br><br>" & Cells(I, 16).Value & "<br><br>" & Cells(I, 17).Value & "<br><br>" & "XXX/" & Cells(I, 18).Value & "</body> </html>"
+    
+    
+    Textotal = Textotal + strBody
+    
+    I = I + 1
+    
+    Wend
+      
+    UF = Range("I2").Value
+    EXPED = Range("X2").Value
+    J = Cells(I, 18).Value
+    TRAS = Range("Y2").Value
+
+    EnviarEtiqueta Textotal, I, J, UF, EXPED, TRAS
+
+
+End Sub
+
+Public Sub EnviarEtiqueta(ByVal Textotal As String, ByVal I As Long, ByVal J As Long, ByVal UF As String, ByVal EXPED As String, ByVal TRAS As String)
+    
+    Set objOlAppApp = CreateObject("Outlook.application")
+    Set objOlAppMsg = objOlAppApp.CreateItem(olMailItem)
+        
+    hora = Hour(Now)
+    If hora >= 18 Then
+    Sal = "Boa noite."
+    ElseIf hora >= 12 Then
+    Sal = "Boa tarde."
+    ElseIf hora >= 0 Then
+    Sal = "Bom dia."
+    End If
+    
+    I = I - 2
+    
+    With objOlAppMsg
+         .Display
+        'E-mail do destinatario
+        .to = "Teste1@gmail.com"
+        .CC = "teste@gmail.com"
+        'Grau de importancia do e-mail
+        '.Importance = olImportanceHigh
+        'Titulo do e-mail
+        '.Subject = "Operação  - " & UF & " - " & TRAS
+        .Subject = "Operação  - " & EXPED
+        'Testo do e-mail
+        '.HTMLBody = Sal & "<br><br>" & "Tudo bem?" & "<br><br>" & _
+        "Gostaria de sinalizar a todos que, dia  " & "<b>" & "(" & EXPED & ") " & "</b>" & "Teremos uma expedição para a" & "<b>" & " " & UF & "</b>" & ", serão " & _
+        "<b>" & "<U>" & J & " volumes" & "</U>" & " (" & I & " NFs)" & "</b>" & "para serem expedidos. " & "<br><br>" & "<b>" & "<U>" & "Não teremos inclusão de Try me:" & "</U>" & "</b>" & _
+        Textotal & .HTMLBody
+        
+        .HTMLBody = Sal & "<br><br>" & "Tudo bem?" & "<br><br>" & _
+        "Gostaria de sinalizar a todos que, dia  " & "<b>" & "(" & EXPED & ") " & "</b>" & "Teremos uma expedição para a" & "<b>" & " " & "</b>" & ", serão " & _
+        "<b>" & "<U>" & J & " volumes" & "</U>" & " (" & I & " NFs)" & "</b>" & "para serem expedidos. " & "<br><br>" & "<b>" & "<U>" & "Não teremos inclusão de Try me:" & "</U>" & "</b>" & _
+        Textotal & .HTMLBody
+        
+    End With
+    
+End Sub
+    
